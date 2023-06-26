@@ -1,10 +1,10 @@
 import os
 import sys
-import time
-
+from datetime import datetime
 
 import gymnasium as gym
 from stable_baselines3.dqn.dqn import DQN
+from sumo_rl import SumoEnvironment
 
 
 if "SUMO_HOME" in os.environ:
@@ -12,9 +12,7 @@ if "SUMO_HOME" in os.environ:
     sys.path.append(tools)
 else:
     sys.exit("Please declare the environment variable 'SUMO_HOME'")
-import traci
 
-from sumo_rl import SumoEnvironment
 
 no_of_episodes = 5
 # generate number of routes, then iterate over them while training
@@ -25,8 +23,8 @@ no_of_episodes = 5
 
 if __name__ == "__main__":
 
-    seconds = time.time()
-    local_time = time.ctime(seconds)
+    now = datetime.now()
+    local_time = now.strftime("%d-%m-%Y_%H-%M-%S")
 
     for e in range(no_of_episodes) :
 
@@ -38,8 +36,6 @@ if __name__ == "__main__":
             use_gui=True,
             num_seconds=5400,
         )
-
-        
 
         if e > 0 :
             model = DQN.load(f"../models/DQN_{local_time}_Episode_{e}",env = env)
