@@ -17,9 +17,6 @@ else:
 no_of_episodes = 5
 # generate number of routes, then iterate over them while training
 
-jdjdjdjhhhh
-hhhh
-
 
 if __name__ == "__main__":
 
